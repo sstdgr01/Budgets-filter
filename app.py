@@ -140,7 +140,7 @@ with tab_chart:
         fig = px.bar(
             grouped,
             x="ปีงบประมาณ",
-            y="",
+            y="จำนวนโครงการ",
             color="รูปแบบงบประมาณ",
             barmode="group",
             text_auto=True,  # <-- โชว์จำนวนบนยอดแท่ง
@@ -160,7 +160,7 @@ with tab_chart:
                 x=0
             ),
             xaxis_title="ปีงบประมาณ",
-            yaxis_title="จำนวนโครงการ"
+            yaxis_title=None
         )
 
         st.plotly_chart(fig, use_container_width=True)
