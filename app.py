@@ -116,14 +116,28 @@ if not filtered_df.empty:
 else:
     st.warning("⚠️ ไม่พบข้อมูลที่ตรงกับเงื่อนไขที่เลือก")
 
-st.markdown("### 📄 ตารางข้อมูล")
-# ลบคอลัมน์ไม่มีชื่อ
-filtered_df = filtered_df.drop(columns=[col for col in filtered_df.columns if not col or "unnamed" in str(col).lower()], errors="ignore")
+tab_table, tab_chart = st.tabs(["📄 ตารางข้อมูล", "📊 กราฟสรุป"])
 
-# แสดงเฉพาะคอลัมน์ที่ต้องการ
-filtered_df = filtered_df[required_columns]
+with tab_table:
+    filtered_df = filtered_df.drop(columns=["id"], errors="ignore")
+    st.dataframe(filtered_df, use_container_width=True)
 
-st.dataframe(filtered_df, use_container_width=True)
+with tab_chart:
+    if not filtered_df.empty:
+        st.markdown("### 📊 จำนวนโครงการตามรูปแบบงบประมาณในแต่ละปี")
+
+        grouped = (
+            filtered_df.groupby(["ปีงบประมาณ", "รูปแบบงบประมาณ"])
+            .size()
+            .reset_index(name="จำนวนโครงการ")
+        )
+
+        pivot_df = grouped.pivot(index="ปีงบประมาณ", columns="รูปแบบงบประมาณ", values="จำนวนโครงการ").fillna(0)
+        pivot_df = pivot_df.sort_index()
+
+        st.bar_chart(pivot_df)
+    else:
+        st.warning("ไม่มีข้อมูลที่จะแสดงในกราฟ")
 
 
 # --- Excel Download ---
