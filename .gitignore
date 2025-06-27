@@ -1,0 +1,5 @@
+# .gitignore
+credentials.json
+*.pyc
+__pycache__/
+.secrets.toml
