@@ -140,6 +140,7 @@ with tab_chart:
         fig = px.bar(
             grouped,
             x="ปีงบประมาณ",
+            y="",
             color="รูปแบบงบประมาณ",
             barmode="group",
             text_auto=True,  # <-- โชว์จำนวนบนยอดแท่ง
