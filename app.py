@@ -180,7 +180,7 @@ col_up, spacer, col_dl = st.columns([2,3,1])
 
 with col_dl:
     if not filtered_df.empty:
-        st.markdown("#### 📥 ดาวน์โหลดข้อมูลที่กรองเป็น Excel")
+        st.markdown("📥 ดาวน์โหลดข้อมูลที่กรองเป็น Excel")
         st.download_button(
             label="💾 ดาวน์โหลดข้อมูล",
             data=to_excel_bytes(filtered_df),
