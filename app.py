@@ -6,8 +6,8 @@ from supabase import create_client, Client
 
 # --- ตั้งค่าหน้าเว็บ ---
 st.set_page_config(page_title="Excel Filter App - Supabase", layout="wide")
-st.title("📊 ฐานข้อมูลโครงการ ของส่วนส่งเสริมและถ่ายทอดเทคโนโลยี")
-st.markdown("ข้อมูล - งบประมาณ ปี 2561-2568 จาก Supabase")
+st.markdown("<h4>📊 ฐานข้อมูลโครงการ</h4>", unsafe_allow_html=True)
+st.markdown("<p style='font-size:16px'>ข้อมูลปี 2561–2568 จาก Supabase</p>", unsafe_allow_html=True)
 
 # --- เชื่อมต่อ Supabase ---
 SUPABASE_URL = st.secrets["supabase_url"]
@@ -180,9 +180,9 @@ col_up, spacer, col_dl = st.columns([2,3,1.5])
 
 with col_dl:
     if not filtered_df.empty:
-        st.markdown("📥 ดาวน์โหลดข้อมูลที่กรองเป็น Excel")
+        st.markdown("📥 ดาวน์โหลดข้อมูลที่กรอง")
         st.download_button(
-            label="💾 ดาวน์โหลดข้อมูล",
+            label="💾 ดาวน์โหลดข้อมูลเป็น Excel",
             data=to_excel_bytes(filtered_df),
             file_name="filtered_data.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
