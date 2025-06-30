@@ -145,7 +145,7 @@ import plotly.express as px
 
 with tab_chart:
     if not filtered_df.empty:
-        st.markdown("### 📊 จำนวนโครงการในแต่ละปี")
+        st.markdown("")
 
         # เตรียมข้อมูล
         filtered_df["ปีงบประมาณ"] = filtered_df["ปีงบประมาณ"].astype(str)
