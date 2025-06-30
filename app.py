@@ -6,6 +6,25 @@ from supabase import create_client, Client
 
 # --- ตั้งค่าหน้าเว็บ ---
 st.set_page_config(page_title="Excel Filter App - Supabase", layout="wide")
+st.markdown("""
+    <style>
+    html, body, [class*="css"]  {
+        font-size: 16px;
+    }
+    @media (max-width: 768px) {
+        html, body, [class*="css"]  {
+            font-size: 13px;
+        }
+        h1, h2, h3 {
+            font-size: 1.2em !important;
+        }
+        .stSelectbox label, .stMultiselect label, .stMarkdown {
+            font-size: 0.95em !important;
+        }
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 st.markdown("<h2>🗃️ ฐานข้อมูลโครงการ ของส่วนส่งเสริมและถ่ายทอดเทคโนโลยี</h2>", unsafe_allow_html=True)
 st.markdown("<p style='font-size:16px'>ข้อมูลปี 2561–2568 จาก Supabase</p>", unsafe_allow_html=True)
 
