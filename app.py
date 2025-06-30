@@ -220,29 +220,28 @@ with col_up:
             if missing_cols:
                 st.error(f"❌ คอลัมน์เหล่านี้หายไปจากไฟล์ที่อัปโหลด: {', '.join(missing_cols)}")
             else:
-            # --- ตรวจสอบข้อมูลซ้ำก่อนอัปโหลด ---
-            uploaded_df["key"] = uploaded_df["โครงการ"].astype(str) + "_" + uploaded_df["ปีงบประมาณ"].astype(str)
-            df["key"] = df["โครงการ"].astype(str) + "_" + df["ปีงบประมาณ"].astype(str)
-            
-            existing_keys = set(df["key"])
-            new_keys = set(uploaded_df["key"])
-            duplicates = new_keys.intersection(existing_keys)
-            
-            if duplicates:
-                sample_dupes = list(duplicates)[:3]
-                st.warning(f"⚠️ มีข้อมูลซ้ำอยู่แล้วในระบบ เช่น: {', '.join(sample_dupes)}...")
-                st.info("📛 กรุณาตรวจสอบและลบข้อมูลที่ซ้ำก่อนอัปโหลด")
-            else:
-                uploaded_df = uploaded_df.drop(columns=["key"], errors="ignore")  # ลบ key ก่อน insert
-                with st.spinner("🚀 กำลังอัปโหลดข้อมูล..."):
-                    supabase.table(TABLE_NAME).insert(uploaded_df.to_dict(orient="records")).execute()
-                project_names = uploaded_df['โครงการ'].dropna().unique().tolist()
-                sample_projects = ", ".join(project_names[:3])
-                more_text = "..." if len(project_names) > 3 else ""
-                st.success(f"✅ เพิ่มข้อมูล {len(uploaded_df)} แถวลงใน Supabase สำเร็จแล้ว")
-                st.info(f"📌 โครงการที่เพิ่ม:\n{sample_projects}{more_text}")
-                st.balloons()
+                # --- ตรวจสอบข้อมูลซ้ำก่อนอัปโหลด ---
+                uploaded_df["key"] = uploaded_df["โครงการ"].astype(str) + "_" + uploaded_df["ปีงบประมาณ"].astype(str)
+                df["key"] = df["โครงการ"].astype(str) + "_" + df["ปีงบประมาณ"].astype(str)
+                
+                existing_keys = set(df["key"])
+                new_keys = set(uploaded_df["key"])
+                duplicates = new_keys.intersection(existing_keys)
+                
+                if duplicates:
+                    sample_dupes = list(duplicates)[:3]
+                    st.warning(f"⚠️ มีข้อมูลซ้ำอยู่แล้วในระบบ เช่น: {', '.join(sample_dupes)}...")
+                    st.info("📛 กรุณาตรวจสอบและลบข้อมูลที่ซ้ำก่อนอัปโหลด")
+                else:
+                    uploaded_df = uploaded_df.drop(columns=["key"], errors="ignore")  # ลบ key ก่อน insert
+                    with st.spinner("🚀 กำลังอัปโหลดข้อมูล..."):
+                        supabase.table(TABLE_NAME).insert(uploaded_df.to_dict(orient="records")).execute()
+                    project_names = uploaded_df['โครงการ'].dropna().unique().tolist()
+                    sample_projects = ", ".join(project_names[:3])
+                    more_text = "..." if len(project_names) > 3 else ""
+                    st.success(f"✅ เพิ่มข้อมูล {len(uploaded_df)} แถวลงใน Supabase สำเร็จแล้ว")
+                    st.info(f"📌 โครงการที่เพิ่ม:\n{sample_projects}{more_text}")
+                    st.balloons()
 
-                st.balloons()  # 🎈
         except Exception as e:
             st.error(f"เกิดข้อผิดพลาดขณะอ่านไฟล์: {e}")
