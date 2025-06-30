@@ -6,7 +6,7 @@ from supabase import create_client, Client
 
 # --- ตั้งค่าหน้าเว็บ ---
 st.set_page_config(page_title="Excel Filter App - Supabase", layout="wide")
-st.markdown("<h2>📊 ฐานข้อมูลโครงการ</h2>", unsafe_allow_html=True)
+st.markdown("<h2>📊 ฐานข้อมูลโครงการ ของส่วนส่งเสริมและถ่ายทอดเทคโนโลยี</h2>", unsafe_allow_html=True)
 st.markdown("<p style='font-size:16px'>ข้อมูลปี 2561–2568 จาก Supabase</p>", unsafe_allow_html=True)
 
 # --- เชื่อมต่อ Supabase ---
