@@ -193,7 +193,7 @@ with spacer:
 
 with col_up:
     st.markdown("📤 อัปโหลด Excel เพื่อเพิ่มข้อมูล")
-    uploaded_file = st.file_uploader("",type=["xlsx"])
+    uploaded_file = st.file_uploader(type=["xlsx"])
     if uploaded_file:
         try:
             uploaded_df = pd.read_excel(uploaded_file)
